@@ -1,0 +1,20 @@
+#Re:Yoga C930 audio on Linux
+#2021-04-07, 16:25 PM
+#Hi
+
+#So, small update how to get DMIC working on Lenovo Yoga C930 under Linux (checked on kernel 5.11)
+
+ 
+
+#1. Download the last topology conf file for chipset from https://github.com/alsa-project/alsa-topology-conf.git (since it is not usually included by default)
+
+#2. Generate topology bin file and copy it to the system
+#cd into the directory with the hda conf file and run the following commands
+#alsatplg -c skl_hda_dsp_generic-tplg.conf -o skl_hda_dsp_generic-tplg.bin
+#sudo cp skl_hda_dsp_generic-tplg.bin /usr/lib/firmware/
+
+#3. Create file sudo nano /etc/modprobe.d/dmicfix.conf and put the following line in,,,without the hashtag, then hit ctrl-x and y to save
+
+#options snd_pcm max_alloc_per_card=41943040
+
+#4. Reboot.
